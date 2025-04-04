@@ -9,11 +9,14 @@ import MusicPlayer from '@/components/MusicPlayer';
 import { playlists, categories, recentlyPlayed, newReleases } from '@/data/mockData';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAudio } from '@/contexts/AudioContext';
+import ChatButton from '@/components/social/ChatButton';
+import ChatDrawer from '@/components/social/ChatDrawer';
 
 const Home = () => {
   const navigate = useNavigate();
   const { playSong } = useAudio();
   const [showFullPlayer, setShowFullPlayer] = useState(false);
+  const [showChatDrawer, setShowChatDrawer] = useState(false);
   
   const handlePlaylistClick = (playlistId: string) => {
     navigate(`/playlist/${playlistId}`);
@@ -21,6 +24,10 @@ const Home = () => {
   
   const handleSongPlay = (song: any) => {
     playSong(song);
+  };
+  
+  const toggleChatDrawer = () => {
+    setShowChatDrawer(prev => !prev);
   };
   
   return (
@@ -106,6 +113,15 @@ const Home = () => {
       {showFullPlayer && (
         <MusicPlayer onClose={() => setShowFullPlayer(false)} />
       )}
+      
+      {/* Chat floating button */}
+      <ChatButton onClick={toggleChatDrawer} />
+      
+      {/* Chat drawer */}
+      <ChatDrawer 
+        isOpen={showChatDrawer} 
+        onClose={() => setShowChatDrawer(false)} 
+      />
     </div>
   );
 };

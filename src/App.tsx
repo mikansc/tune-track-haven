@@ -15,29 +15,32 @@ import Library from "./pages/Library";
 import Profile from "./pages/Profile";
 import PlaylistDetail from "./pages/PlaylistDetail";
 import { AudioProvider } from "./contexts/AudioContext";
+import { SocialProvider } from "./contexts/SocialContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AudioProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/playlist/:id" element={<PlaylistDetail />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <SocialProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/playlist/:id" element={<PlaylistDetail />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </SocialProvider>
     </AudioProvider>
   </QueryClientProvider>
 );
